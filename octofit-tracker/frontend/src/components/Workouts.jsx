@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { buildApiUrl, normalizeApiRecords } from '../api';
+import { normalizeApiRecords } from '../api';
 
 function getValue(value, fallback = 'N/A') {
   if (value === null || value === undefined || value === '') {
@@ -20,7 +20,10 @@ export default function Workouts() {
 
     async function loadWorkouts() {
       try {
-        const response = await fetch(buildApiUrl('workouts'));
+        const baseUrl = import.meta.env.VITE_CODESPACE_NAME
+          ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
+          : 'http://localhost:8000';
+        const response = await fetch(`${baseUrl}/api/workouts/`);
 
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
