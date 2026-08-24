@@ -23,7 +23,7 @@ export default function Workouts() {
         const baseUrl = import.meta.env.VITE_CODESPACE_NAME
           ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
           : 'http://localhost:8000';
-        const response = await fetch(`${baseUrl}/api/workouts/`);
+        const response = await fetch(`${baseUrl}/api/workouts`);
 
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
